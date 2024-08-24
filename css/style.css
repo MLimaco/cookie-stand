@@ -1,0 +1,10 @@
+:root{
+    --font-encabezados: "Righteous", sans-serif;
+    --color-principal: salmon;
+    --color-secundario: green;
+}
+
+h1{
+    font-family: var(--font-encabezados);
+    color:var(--color-principal);
+}
