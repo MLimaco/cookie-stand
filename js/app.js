@@ -2,6 +2,9 @@
 const horasAtencion = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 const tiendas = [];
 const elementosDeTabla = document.getElementById('sales-table');
+const formElement = document.getElementById('addLocation')
+
+const footerTabla=document.createElement('tfoot');
 
 function Locacion(location, minConsumidoresPorHora, maxConsumidoresPorHora, promedioDeGalletasPorPersona) {
     this.location = location;
@@ -79,7 +82,7 @@ function footerTable() {
     let pieDeTabla = document.createElement('th');
     pieDeTabla.textContent = 'total';
     tablaFila.appendChild(pieDeTabla);
-    
+
     let totalDeTotales = 0;
     for (let i = 0; i < horasAtencion.length; i++) {
         let totalPorHora = 0;
@@ -87,22 +90,52 @@ function footerTable() {
             totalPorHora += tiendas[j].galletasVendidasPorHora[i];
             totalDeTotales += tiendas[j].galletasVendidasPorHora[i];
         }
-        pieDeTabla=document.createElement('th');
+        pieDeTabla = document.createElement('th');
         pieDeTabla.textContent = totalPorHora;
         tablaFila.appendChild(pieDeTabla);
     }
     pieDeTabla = document.createElement('th');
     pieDeTabla.textContent = totalDeTotales;
-    tablaFila.appendChild(pieDeTabla)
-    elementosDeTabla.appendChild(tablaFila)
+    tablaFila.appendChild(pieDeTabla);
+    footerTabla.appendChild(tablaFila);
+    elementosDeTabla.appendChild(footerTabla);
 }
 
-function ejecutarTabla(){
+function handleForm(e) {
+    e.preventDefault();
+
+    const loc = e.target.location.value;
+    const min = parseInt(e.target.minConsumidores.value);
+    const max = parseInt(e.target.maxConsumidores.value);
+    const prom = parseFloat(e.target.promGalletas.value);
+
+    console.log(e);
+    console.log(loc);
+    console.log(min);
+    console.log(max);
+    console.log(prom);
+
+    const newTienda = new Locacion(loc, min, max, prom);
+    tiendas.push(newTienda);
+    console.log(newTienda);
+
+    e.target.location.value = null;
+    e.target.minConsumidores.value = null;
+    e.target.maxConsumidores.value = null;
+    e.target.promGalletas.value = null;
+
+    footerTabla.innerHTML='';
+    newTienda.mostrarVentas();
+    footerTable();
+}
+
+function ejecutarTabla() {
     encabezadoTabla();
-    for (let i = 0; i<tiendas.length; i++){
+    for (let i = 0; i < tiendas.length; i++) {
         tiendas[i].mostrarVentas();
     }
     footerTable();
 }
 
-ejecutarTabla();
+ejecutarTabla(); 3
+formElement.addEventListener('submit', handleForm);
