@@ -1,10 +1,89 @@
 :root{
     --font-encabezados: "Righteous", sans-serif;
+    --font-cuerpo: "Roboto", sans-serif;
     --color-principal: salmon;
     --color-secundario: green;
+}
+
+header >*:not(nav) {
+    background-color: black;
+    display: flex;
+    justify-content: center;
 }
 
 h1{
     font-family: var(--font-encabezados);
     color:var(--color-principal);
+    font-size: 50px;
 }
+
+nav{
+    background-color: salmon;
+    height: 40px;
+    display: flex;
+    
+}
+
+nav a{
+    padding-left: 2%;
+    margin:auto 5px;
+}
+
+section{
+    text-transform: capitalize;
+    line-height: 1.5;
+}
+
+#sucursales h2{
+    font-family: var(--font-encabezados);
+    font-size: 25px;
+}
+
+main >*:not(img){
+    margin:2% 5%;
+    font-family: var(--font-cuerpo);
+}
+
+main img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+table {
+    table-layout: auto;
+    width: 100%;
+    text-align: center;
+    color: black;
+    background-color: salmon;
+    margin-top: 1%;
+}
+
+table td:first-child,
+table th:first-child {
+text-align: left;
+padding-left: 1%;
+}
+
+th {
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+fieldset {
+    border: 1px solid black;
+    padding: 20px 20px;
+
+}
+
+legend {
+    color: salmon;
+    font-family: var(--font-encabezados);
+  }
+  
